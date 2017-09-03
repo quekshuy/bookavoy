@@ -1,5 +1,9 @@
 # Bookavoy
 
+My first real attempt at writing Elixir + Phoenix. An API that responds to Slack slash commands.
+
+## Setup
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`

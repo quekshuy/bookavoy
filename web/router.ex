@@ -28,5 +28,6 @@ defmodule Bookavoy.Router do
      pipe_through :api
 
      post "/slash", SlackController, :slash
+     post "/message-button", SlackController, :message_button
    end
 end

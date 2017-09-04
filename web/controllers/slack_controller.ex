@@ -1,6 +1,8 @@
 defmodule Bookavoy.SlackController do
   use Bookavoy.Web, :controller
 
+  #plug :authenticate_slack
+
   @doc """
   Responds to a command. Gives users. Formulates
   a response. Sends something with buttons back for 
@@ -22,6 +24,48 @@ defmodule Bookavoy.SlackController do
         |> put_status(400)
         |> text("jia lat loh")
     end
+  end
+
+  @doc """
+  Parameters will look something like this:
+  payload= JSON_ENCODED(
+    { 
+      "actions":[ {
+            }
+            ]
+      "callback_id"
+      "team": {
+        "id"
+        "domain"
+      }
+      "channel": {
+        "id"
+        "name"
+        },
+      "user" : {
+        "id"
+        "name"
+      },
+      "action_ts"
+      "message_ts"
+      "attachment_id"
+      "token"
+      "original_message"
+      "response_url"
+    }
+  )
+  """
+  def message_button(conn, params \\ %{}) do
+    button_info = Poison.Parser.parse!(params["payload"])
+    IO.inspect button_info
+    conn
+    |> put_status(200)
+    |> text("message button received")
+  end
+
+  # TODO: this will verify the slack token.
+  defp authenticate_slack(conn, _params) do
+    conn
   end
 
 end
